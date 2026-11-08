@@ -1,0 +1,43 @@
+{
+  "name": "dsh-RSI",
+  "version": "0.7.0",
+  "private": true,
+  "type": "module",
+  "description": "dsh-RSI · 递归自进化：在 DSH 侧栏按工作区管理 RSI 项目，从想法、意图到可冻结的进化任务规范。",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nick-Hogo/dsh-rsi.git"
+  },
+  "exports": {
+    ".": "./host/index.js",
+    "./client": "./client/client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "host/index.js",
+    "client/client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "docs/*.md",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "node --check host/index.js && node --check host/engine/proposer.js && node --check client/client.js && node test/smoke.mjs && node test/proposer.test.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  }
+}
